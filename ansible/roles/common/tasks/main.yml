@@ -8,12 +8,13 @@
 - name: Install libselinux-python
   yum: name=libselinux-python state=present
 
-- name: Copy the EPEL repository definition
-  copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
+- name: Install Repository
+  yum: name={{ item }} state=present
+  with_items:
+    - epel-release
+    - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 
-- name: Create the GPG key for EPEL
-  copy: src=RPM-GPG-KEY-EPEL-6 dest=/etc/pki/rpm-gpg
-
-- name: Set up iptables rules
-  copy: src=iptables-save dest=/etc/sysconfig/iptables
-  notify: restart iptables
+- replace: dest=/etc/yum.repos.d/{{ item }} regexp="enabled *= *1" replace="enabled=0"
+  with_items:
+    - epel.repo
+    - remi.repo

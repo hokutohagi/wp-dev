@@ -1,6 +1,6 @@
 ---
 - name: Install Mysql package
-  yum: name={{ item }} state=present
+  yum: name={{ item }} state=present enablerepo=remi
   with_items:
    - mysql-server
    - MySQL-python
