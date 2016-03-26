@@ -7,7 +7,7 @@
 ### ゲストOS動作環境
   Cent0S 6.7  
   Ansible 1.9.4  
-	wp_version 4.2.4  
+	wp_version 4.4.2  
 
 ### vagrantの実行は以下の様に行う:
   git clone git@github.com:de2p-shikataro/wordpress-development.git  
