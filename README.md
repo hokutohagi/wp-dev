@@ -10,8 +10,8 @@
 	wp_version 4.4.2  
 
 ### vagrantの実行は以下の様に行う:
-  git clone git@github.com:de2p-shikataro/wordpress-development.git  
-	cd wordpress-development  
+  git clone git@github.com:de2p-shikataro/wp-dev.git  
+	cd wp-dev  
 	vagrant up  
 
 ### WordPressへのアクセスは以下のURLへ
