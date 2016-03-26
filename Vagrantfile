@@ -14,6 +14,9 @@ Vagrant.configure(2) do |config|
   # ゲストOSのIPアドレスの設定
   config.vm.network "private_network", ip: "192.168.33.10"
 
+  # ホストとゲストのディレクトリ同期設定
+  config.vm.synced_folder "wordpress", "/srv/wordpress", create: "true", type: "rsync"
+
   # ansibleの設定
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/site.yml"
