@@ -18,3 +18,8 @@
   with_items:
     - epel.repo
     - remi.repo
+
+- replace: dest=/etc/yum.repos.d/{{ item }} regexp="#baseurl=" replace="baseurl="
+  with_items:
+    - epel.repo
+    - remi.repo
