@@ -12,10 +12,15 @@ Vagrant.configure(2) do |config|
   config.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.6.7/vagrant-centos-6.7.box"
 
   # ゲストOSのIPアドレスの設定
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.50.50"
 
   # ホストとゲストのディレクトリ同期設定
-  config.vm.synced_folder "wordpress", "/srv/wordpress", create: "true", type: "rsync"
+  config.vm.synced_folder "wordpress", "/home/wordpress", create: "true", mount_options: ['dmode=777,fmode=777']
+
+  # box name
+  config.vm.provider :virtualbox do |vb|
+      vb.name = "wpdev"
+  end
 
   begin
     Vagrant.require_version(">= 1.8.2")

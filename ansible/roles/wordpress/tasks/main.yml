@@ -1,16 +1,16 @@
 ---
 # - name: Download WordPress
-#   get_url: url=http://ja.wordpress.org/wordpress-{{ wp_version }}-ja.tar.gz dest=/srv/wordpress-{{ wp_version }}.tar.gz
+#   get_url: url=http://ja.wordpress.org/wordpress-{{ wp_version }}-ja.tar.gz dest={{ wp_document_root_path }}-{{ wp_version }}.tar.gz
 #            sha256sum="{{ wp_sha256sum }}"
 #
 # - name: Extract archive
-#   command: chdir=/srv/ /bin/tar xvf wordpress-{{ wp_version }}.tar.gz creates=/srv/wordpress
+#   command: chdir=/srv/ /bin/tar xvf wordpress-{{ wp_version }}.tar.gz creates={{ wp_document_root_path }}
 
 - name: Add group "wordpress"
   group: name=wordpress
 
 - name: Add user "wordpress"
-  user: name=wordpress group=wordpress home=/srv/wordpress/
+  user: name=wordpress group=wordpress home={{ wp_document_root_path }}
 
 - name: Fetch random salts for WordPress config
   local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
@@ -24,10 +24,10 @@
   mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='localhost' state=present
 
 - name: Copy WordPress config file
-  template: src=wp-config.php dest=/srv/wordpress/
+  template: src=wp-config.php dest={{ wp_document_root_path }}
 
 - name: Change ownership of WordPress installation
-  file: path=/srv/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
+  file: path={{ wp_document_root_path }} owner=wordpress group=wordpress state=directory recurse=yes
 
 - name: Start php-fpm Service
   service: name=php-fpm state=started enabled=yes

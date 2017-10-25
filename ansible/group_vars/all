@@ -3,6 +3,9 @@
 wp_version: 4.2.4
 wp_sha256sum: 71046b99c76b19d6f0a8d472dd9db53e24f362235a30dac0f8fd0dab36aeb76b
 
+# WordPress DocumentRoot path
+wp_document_root_path: "/home/wordpress/"
+
 # These are the WordPress database settings
 wp_db_name: wordpress
 wp_db_user: wordpress
